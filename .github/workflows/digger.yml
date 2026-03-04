@@ -10,7 +10,7 @@ on:
 
 jobs:
   digger-job:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: write      # required to merge PRs
       actions: write       # required for plan persistence
@@ -23,12 +23,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache local Terraform state (test only)
+        uses: actions/cache@v4
+        with:
+          path: |
+            envs/**/.terraform-state
+          key: terraform-state-${{ github.repository }}-${{ github.ref_name }}
+          restore-keys: |
+            terraform-state-${{ github.repository }}-
 
       - name: Run Digger
         uses: diggerhq/digger@vLatest
         with:
           setup-terraform: true
           terraform-version: 1.5.7
+          no-backend: true
+          disable-locking: true
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ github.token }}
