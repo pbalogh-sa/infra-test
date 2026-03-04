@@ -11,6 +11,7 @@ on:
 jobs:
   digger-job:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write      # required to merge PRs
       actions: write       # required for plan persistence
