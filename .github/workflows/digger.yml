@@ -19,6 +19,7 @@ jobs:
       issues: read         # required to check if PR number is an issue or not
       statuses: write      # required to validate combined PR status
 
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
