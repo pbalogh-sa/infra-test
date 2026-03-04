@@ -10,7 +10,7 @@ on:
 
 jobs:
   digger-job:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     permissions:
       contents: write      # required to merge PRs
       actions: write       # required for plan persistence
@@ -18,7 +18,6 @@ jobs:
       pull-requests: write # required to post PR comments
       issues: read         # required to check if PR number is an issue or not
       statuses: write      # required to validate combined PR status
-
 
     steps:
       - name: Checkout code
