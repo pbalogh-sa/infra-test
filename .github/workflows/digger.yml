@@ -23,6 +23,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Cache local Terraform state (test only)
+        uses: actions/cache@v4
+        with:
+          path: |
+            envs/**/.terraform-state
+          key: terraform-state-${{ github.repository }}-${{ github.ref_name }}
+          restore-keys: |
+            terraform-state-${{ github.repository }}-
 
       - name: Run Digger
         uses: diggerhq/digger@vLatest

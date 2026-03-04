@@ -1,5 +1,9 @@
 
 terraform {
+  backend "local" {
+    path = ".terraform-state/terraform.tfstate"
+  }
+
   required_providers {
     null = {
       source  = "hashicorp/null"
@@ -7,7 +11,6 @@ terraform {
     }
   }
 }
-
 
 resource "null_resource" "example" {
   triggers = {
