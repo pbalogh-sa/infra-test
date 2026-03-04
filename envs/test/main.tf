@@ -1,9 +1,5 @@
 
 terraform {
-  backend "local" {
-    path = ".terraform-state/terraform.tfstate"
-  }
-
   required_providers {
     null = {
       source  = "hashicorp/null"
