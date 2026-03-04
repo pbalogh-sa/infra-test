@@ -3,8 +3,8 @@ projects:
     dir: ./envs/test
     workflow: aom
 
-disable_digger_apply_comment: true
-disable_digger_apply_status_check: true
+disable_digger_apply_comment: false
+disable_digger_apply_status_check: false
 
 workflows:
   aom:

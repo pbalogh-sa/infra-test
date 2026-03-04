@@ -26,6 +26,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Prepare local backend state dir
+        run: mkdir -p envs/test/.terraform-state
+
       - name: Cache local Terraform state (test only)
         uses: actions/cache@v4
         with:
@@ -35,13 +38,29 @@ jobs:
           restore-keys: |
             terraform-state-${{ github.repository }}-
 
-      - name: Run Digger
+      - name: Run Digger (PR/CommentOps)
         uses: diggerhq/digger@vLatest
+        if: github.event_name != 'push'
         with:
           setup-terraform: true
           terraform-version: 1.5.7
           no-backend: true
           disable-locking: true
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Run Digger (push to main apply)
+        uses: diggerhq/digger@vLatest
+        if: github.event_name == 'push'
+        with:
+          setup-terraform: true
+          terraform-version: 1.5.7
+          no-backend: true
+          disable-locking: true
+          mode: manual
+          project: test
+          command: digger apply
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ github.token }}
