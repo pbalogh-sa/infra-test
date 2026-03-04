@@ -12,6 +12,7 @@ terraform {
   }
 }
 
+
 resource "null_resource" "example" {
   triggers = {
     # Changes every run to make this resource re-create on each apply.
