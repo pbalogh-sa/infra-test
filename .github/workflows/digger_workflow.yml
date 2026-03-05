@@ -62,7 +62,7 @@ jobs:
           disable-locking: true
           mode: manual
           project: test
-          command: digger apply
+          command: digger plan
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ github.token }}
