@@ -60,9 +60,6 @@ jobs:
           setup-terraform: true
           terraform-version: 1.5.7
           disable-locking: true
-          mode: manual
-          project: test
-          command: digger plan
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           GITHUB_TOKEN: ${{ github.token }}
