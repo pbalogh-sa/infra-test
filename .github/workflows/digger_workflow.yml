@@ -8,7 +8,18 @@ on:
     types: [ opened, synchronize ]
   issue_comment:
     types: [created]
-  workflow_dispatch:
+#   workflow_dispatch:
+#     inputs:
+#       spec:
+#         required: false
+#         description: "Digger orchestrator spec"
+#         default: ""
+#       run_name:
+#         required: false
+#         description: "Optional run name"
+#         default: ""
+
+# run-name: '${{inputs.run_name}}'
 
 jobs:
   digger-job:
@@ -42,9 +53,12 @@ jobs:
         uses: diggerhq/digger@vLatest
         if: github.event_name != 'push'
         with:
+          # digger-spec: ${{ inputs.spec }}
+          # digger-token: ${{ secrets.DIGGER_TOKEN }}
+          # digger-hostname: https://otaco.app
+          no-backend: true
           setup-terraform: true
           terraform-version: 1.5.7
-          no-backend: true
           disable-locking: true
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -54,9 +68,12 @@ jobs:
         uses: diggerhq/digger@vLatest
         if: github.event_name == 'push'
         with:
+          # digger-spec: ${{ inputs.spec }}
+          # digger-token: ${{ secrets.DIGGER_TOKEN }}
+          # digger-hostname: https://otaco.app
+          no-backend: true
           setup-terraform: true
           terraform-version: 1.5.7
-          no-backend: true
           disable-locking: true
           mode: manual
           project: test
