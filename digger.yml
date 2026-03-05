@@ -1,14 +1,14 @@
 projects:
   - name: test
     dir: ./envs/test
-    workflow: aom
+    # workflow: aom
 
 disable_digger_apply_comment: true
 disable_digger_apply_status_check: true
 
-workflows:
-  aom:
-    workflow_configuration:
-      on_pull_request_pushed: [digger plan]
-      on_pull_request_closed: [digger unlock]
-      on_commit_to_default: [digger apply]
+# workflows:
+#   aom:
+#     workflow_configuration:
+#       on_pull_request_pushed: [digger plan]
+#       on_pull_request_closed: [digger unlock]
+#       on_commit_to_default: [digger apply]
