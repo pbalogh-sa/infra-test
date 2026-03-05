@@ -1,8 +1,6 @@
 name: Digger Workflow
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
     types: [ opened, synchronize, reopened ]
@@ -39,7 +37,6 @@ jobs:
 
       - name: Run Digger (PR/CommentOps)
         uses: diggerhq/digger@vLatest
-        if: github.event_name != 'push'
         with:
           # digger-spec: ${{ inputs.spec }}
           # digger-token: ${{ secrets.DIGGER_TOKEN }}
