@@ -8,18 +8,18 @@ on:
     types: [ opened, synchronize ]
   issue_comment:
     types: [created]
-#   workflow_dispatch:
-#     inputs:
-#       spec:
-#         required: false
-#         description: "Digger orchestrator spec"
-#         default: ""
-#       run_name:
-#         required: false
-#         description: "Optional run name"
-#         default: ""
+  workflow_dispatch:
+    inputs:
+      spec:
+        required: false
+        description: "Digger orchestrator spec"
+        default: ""
+      run_name:
+        required: false
+        description: "Optional run name"
+        default: ""
 
-# run-name: '${{inputs.run_name}}'
+run-name: '${{inputs.run_name}}'
 
 jobs:
   digger-job:
